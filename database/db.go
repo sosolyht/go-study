@@ -1,9 +1,11 @@
 package database
 
 import (
+	"echo/database/entity"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
+	"log"
 )
 
 func DBConnection() *gorm.DB {
@@ -15,6 +17,13 @@ func DBConnection() *gorm.DB {
 		})
 	if err != nil {
 		panic(err)
+	}
+
+	err = db.AutoMigrate(
+		&entity.User{},
+	)
+	if err != nil {
+		log.Fatal(err)
 	}
 
 	return db
