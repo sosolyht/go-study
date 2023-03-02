@@ -20,7 +20,7 @@ func DBConnection() *gorm.DB {
 	}
 
 	err = db.AutoMigrate(
-		&entity.User{},
+		&entity.Users{},
 	)
 	if err != nil {
 		log.Fatal(err)
