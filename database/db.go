@@ -8,7 +8,9 @@ import (
 	"log"
 )
 
-func DBConnection() *gorm.DB {
+var db *gorm.DB
+
+func DBConnection() (db *gorm.DB) {
 	// gorm 의 mysql 드라이버를 이용해 기존 dsn 으로 연결
 	// Config 의 Logger 를 통한 쿼리 로그
 	db, err := gorm.Open(mysql.Open("root:1234@tcp(localhost:3306)/study"),
@@ -26,5 +28,9 @@ func DBConnection() *gorm.DB {
 		log.Fatal(err)
 	}
 
+	return db
+}
+
+func GetDBInstance() *gorm.DB {
 	return db
 }
